@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "rm",
+      "args": ["-rf", "build"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Meson Configure and Build",
+      "type": "shell",
+      "command": "",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Meson Configure", "Meson Build"]
+    },
+    {
+      "label": "Meson Configure",
+      "type": "shell",
+      "command": "meson",
+      "args": ["--prefix=/usr", "build"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Meson Build",
+      "type": "shell",
+      "command": "meson",
+      "args": ["compile", "-C", "build"],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Meson Install",
+      "type": "shell",
+      "command": "sudo",
+      "args": [
+        "meson",
+        "install",
+        "-C",
+        "build",
+        "--destdir",
+        "/",
+        "--no-rebuild"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}
